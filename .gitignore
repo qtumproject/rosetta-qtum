@@ -1,3 +1,5 @@
-rosetta-bitcoin
-bitcoin-data
+rosetta-qtum
+# bitcoin-data
 cli-data
+mainnetdata
+testnetdata

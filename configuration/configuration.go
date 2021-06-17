@@ -22,7 +22,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/coinbase/rosetta-bitcoin/bitcoin"
+	"github.com/qtumproject/rosetta-qtum/bitcoin"
 
 	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/coinbase/rosetta-sdk-go/storage/encoder"
@@ -54,15 +54,15 @@ const (
 
 	// testnetConfigPath is the path of the Bitcoin
 	// configuration file for testnet.
-	testnetConfigPath = "/app/bitcoin-testnet.conf"
+	testnetConfigPath = "/app/qtum-testnet.conf"
 
 	// Zstandard compression dictionaries
 	transactionNamespace         = "transaction"
 	testnetTransactionDictionary = "/app/testnet-transaction.zstd"
 	mainnetTransactionDictionary = "/app/mainnet-transaction.zstd"
 
-	mainnetRPCPort = 8332
-	testnetRPCPort = 18332
+	mainnetRPCPort = 3889
+	testnetRPCPort = 13889
 
 	// min prune depth is 288:
 	// https://github.com/bitcoin/bitcoin/blob/ad2952d17a2af419a04256b10b53c7377f826a27/src/validation.h#L84
@@ -79,8 +79,8 @@ const (
 	// persistent data.
 	DataDirectory = "/data"
 
-	bitcoindPath = "bitcoind"
-	indexerPath  = "indexer"
+	qtumdPath   = "qtumd"
+	indexerPath = "indexer"
 
 	// allFilePermissions specifies anyone can do anything
 	// to the file.
@@ -143,9 +143,9 @@ func LoadConfiguration(baseDirectory string) (*Configuration, error) {
 			return nil, fmt.Errorf("%w: unable to create indexer path", err)
 		}
 
-		config.BitcoindPath = path.Join(baseDirectory, bitcoindPath)
+		config.BitcoindPath = path.Join(baseDirectory, qtumdPath)
 		if err := ensurePathExists(config.BitcoindPath); err != nil {
-			return nil, fmt.Errorf("%w: unable to create bitcoind path", err)
+			return nil, fmt.Errorf("%w: unable to create qtumd path", err)
 		}
 	case Offline:
 		config.Mode = Offline
@@ -155,6 +155,15 @@ func LoadConfiguration(baseDirectory string) (*Configuration, error) {
 		return nil, fmt.Errorf("%s is not a valid mode", modeValue)
 	}
 
+	var qtumMainNetParams = bitcoin.MainnetParams
+	var qtumTestNetParams = bitcoin.MainnetParams
+
+	qtumMainNetParams.PubKeyHashAddrID = 58
+	qtumMainNetParams.ScriptHashAddrID = 50
+
+	qtumTestNetParams.PubKeyHashAddrID = 120
+	qtumTestNetParams.ScriptHashAddrID = 110
+
 	networkValue := os.Getenv(NetworkEnv)
 	switch networkValue {
 	case Mainnet:
@@ -163,7 +172,8 @@ func LoadConfiguration(baseDirectory string) (*Configuration, error) {
 			Network:    bitcoin.MainnetNetwork,
 		}
 		config.GenesisBlockIdentifier = bitcoin.MainnetGenesisBlockIdentifier
-		config.Params = bitcoin.MainnetParams
+		// config.Params = bitcoin.MainnetParams
+		config.Params = qtumMainNetParams
 		config.Currency = bitcoin.MainnetCurrency
 		config.ConfigPath = mainnetConfigPath
 		config.RPCPort = mainnetRPCPort
@@ -179,7 +189,7 @@ func LoadConfiguration(baseDirectory string) (*Configuration, error) {
 			Network:    bitcoin.TestnetNetwork,
 		}
 		config.GenesisBlockIdentifier = bitcoin.TestnetGenesisBlockIdentifier
-		config.Params = bitcoin.TestnetParams
+		config.Params = qtumTestNetParams
 		config.Currency = bitcoin.TestnetCurrency
 		config.ConfigPath = testnetConfigPath
 		config.RPCPort = testnetRPCPort

@@ -26,7 +26,7 @@ import (
 	"strconv"
 	"time"
 
-	bitcoinUtils "github.com/coinbase/rosetta-bitcoin/utils"
+	bitcoinUtils "github.com/qtumproject/rosetta-qtum/utils"
 
 	"github.com/btcsuite/btcutil"
 	"github.com/coinbase/rosetta-sdk-go/types"
@@ -92,8 +92,8 @@ const (
 	// returned in Bitcoin blocks to be milliseconds.
 	timeMultiplier = 1000
 
-	// rpc credentials are fixed in rosetta-bitcoin
-	// because we never expose access to the raw bitcoind
+	// rpc credentials are fixed in rosetta-qtum
+	// because we never expose access to the raw qtumd
 	// endpoints (that could be used perform an attack, like
 	// changing our peers).
 	rpcUsername = "rosetta"
@@ -109,7 +109,7 @@ var (
 	ErrJSONRPCError = errors.New("JSON-RPC error")
 )
 
-// Client is used to fetch blocks from bitcoind and
+// Client is used to fetch blocks from qtumd and
 // to parse Bitcoin block data into Rosetta types.
 //
 // We opted not to use existing Bitcoin RPC libraries
@@ -161,7 +161,7 @@ func newHTTPClient(timeout time.Duration) *http.Client {
 }
 
 // NetworkStatus returns the *types.NetworkStatusResponse for
-// bitcoind.
+// qtumd.
 func (b *Client) NetworkStatus(ctx context.Context) (*types.NetworkStatusResponse, error) {
 	rawBlock, err := b.getBlock(ctx, nil)
 	if err != nil {
@@ -263,7 +263,7 @@ func (b *Client) ParseBlock(
 }
 
 // SendRawTransaction submits a serialized transaction
-// to bitcoind.
+// to qtumd.
 func (b *Client) SendRawTransaction(
 	ctx context.Context,
 	serializedTx string,
@@ -656,7 +656,7 @@ func (b *Client) parseOutputTransactionOperation(
 		CoinAction: types.CoinCreated,
 	}
 
-	// If we are unable to parse the output account (i.e. bitcoind
+	// If we are unable to parse the output account (i.e. qtumd
 	// returns a blank/nonstandard ScriptPubKey), we create an address as the
 	// concatenation of the tx hash and index.
 	//

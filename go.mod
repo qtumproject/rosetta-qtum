@@ -1,4 +1,4 @@
-module github.com/coinbase/rosetta-bitcoin
+module github.com/qtumproject/rosetta-qtum
 
 go 1.13
 
