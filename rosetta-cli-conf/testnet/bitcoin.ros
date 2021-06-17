@@ -1,6 +1,6 @@
 request_funds(1){
   find_account{
-    currency = {"symbol":"tBTC", "decimals":8};
+    currency = {"symbol":"tQTUM", "decimals":8};
     random_account = find_balance({
       "minimum_balance":{
         "value": "0",

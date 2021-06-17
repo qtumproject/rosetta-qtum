@@ -12,29 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Build bitcoind
-FROM ubuntu:18.04 as bitcoind-builder
+# Build qtumd
+FROM ubuntu:18.04 as qtumd-builder
 
 RUN mkdir -p /app \
   && chown -R nobody:nogroup /app
 WORKDIR /app
 
-# Source: https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md#ubuntu--debian
-RUN apt-get update && apt-get install -y make gcc g++ autoconf autotools-dev bsdmainutils build-essential git libboost-all-dev \
-  libcurl4-openssl-dev libdb++-dev libevent-dev libssl-dev libtool pkg-config python python-pip libzmq3-dev wget
 
-# VERSION: Bitcoin Core 0.20.1
-RUN git clone https://github.com/bitcoin/bitcoin \
-  && cd bitcoin \
-  && git checkout 7ff64311bee570874c4f0dfa18f518552188df08
+ENV QTUM_RELEASE_URL https://github.com/qtumproject/qtum/releases/download/mainnet-fastlane-v0.20.3
+ENV QTUM_ARCHIVE qtum-0.20.3-x86_64-linux-gnu.tar.gz
+ENV QTUM_FOLDER qtum-0.20.3
 
-RUN cd bitcoin \
-  && ./autogen.sh \
-  && ./configure --disable-tests --without-miniupnpc --without-gui --with-incompatible-bdb --disable-hardening --disable-zmq --disable-bench --disable-wallet \
-  && make
-
-RUN mv bitcoin/src/bitcoind /app/bitcoind \
-  && rm -rf bitcoin
+ADD $QTUM_RELEASE_URL/$QTUM_ARCHIVE ./
+RUN tar -xzf $QTUM_ARCHIVE \
+&& rm $QTUM_ARCHIVE \
+&& mv $QTUM_FOLDER/bin/qtumd /app/qtumd \
+&& rm -rf $QTUM_FOLDER
 
 # Build Rosetta Server Components
 FROM ubuntu:18.04 as rosetta-builder
@@ -81,7 +75,7 @@ RUN mkdir -p /app \
 WORKDIR /app
 
 # Copy binary from bitcoind-builder
-COPY --from=bitcoind-builder /app/bitcoind /app/bitcoind
+COPY --from=qtumd-builder /app/qtumd /app/qtumd
 
 # Copy binary from rosetta-builder
 COPY --from=rosetta-builder /app/* /app/

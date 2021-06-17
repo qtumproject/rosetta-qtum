@@ -24,7 +24,7 @@ import (
 
 const (
 	// Blockchain is Bitcoin.
-	Blockchain string = "Bitcoin"
+	Blockchain string = "Qtum"
 
 	// MainnetNetwork is the value of the network
 	// in MainnetNetworkIdentifier.
@@ -93,10 +93,14 @@ var (
 
 	// MainnetParams are the params for mainnet.
 	MainnetParams = &chaincfg.MainNetParams
+	//MainnetParams.PubKeyHashAddrID = 58
+	//MainnetParams.ScriptHashAddrID = 50
+	//MainnetParams.PrivateKeyID = 128
+	//MainnetParams.Bech32HRPSegwit = "qc"
 
 	// MainnetCurrency is the *types.Currency for mainnet.
 	MainnetCurrency = &types.Currency{
-		Symbol:   "BTC",
+		Symbol:   "QTUM",
 		Decimals: Decimals,
 	}
 
@@ -106,11 +110,17 @@ var (
 	}
 
 	// TestnetParams are the params for testnet.
+	//chaincfg.TestNet3Params.PubKeyHashAddrID = 120
+	//chaincfg.TestNet3Params.ScriptHashAddrID = 110
+	//chaincfg.TestNet3Params.PrivateKeyID = 239
+	//chaincfg.TestNet3Params.Bech32HRPSegwit = "tq"
+
+
 	TestnetParams = &chaincfg.TestNet3Params
 
 	// TestnetCurrency is the *types.Currency for testnet.
 	TestnetCurrency = &types.Currency{
-		Symbol:   "tBTC",
+		Symbol:   "tQTUM",
 		Decimals: Decimals,
 	}
 

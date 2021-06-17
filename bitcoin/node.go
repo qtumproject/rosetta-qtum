@@ -66,7 +66,7 @@ func logPipe(ctx context.Context, pipe io.ReadCloser, identifier string) error {
 func StartBitcoind(ctx context.Context, configPath string, g *errgroup.Group) error {
 	logger := utils.ExtractLogger(ctx, "bitcoind")
 	cmd := exec.Command(
-		"/app/bitcoind",
+		"/app/qtumd",
 		fmt.Sprintf("--conf=%s", configPath),
 	) // #nosec G204
 

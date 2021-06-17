@@ -79,7 +79,7 @@ const (
 	// persistent data.
 	DataDirectory = "/data"
 
-	bitcoindPath = "bitcoind"
+	bitcoindPath = "qtumd"
 	indexerPath  = "indexer"
 
 	// allFilePermissions specifies anyone can do anything
@@ -180,6 +180,11 @@ func LoadConfiguration(baseDirectory string) (*Configuration, error) {
 		}
 		config.GenesisBlockIdentifier = bitcoin.TestnetGenesisBlockIdentifier
 		config.Params = bitcoin.TestnetParams
+		config.Params.PubKeyHashAddrID = 120
+		config.Params.ScriptHashAddrID = 110
+		config.Params.PrivateKeyID = 239
+		config.Params.Bech32HRPSegwit = "tq"
+
 		config.Currency = bitcoin.TestnetCurrency
 		config.ConfigPath = testnetConfigPath
 		config.RPCPort = testnetRPCPort
