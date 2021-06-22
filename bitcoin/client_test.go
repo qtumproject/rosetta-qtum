@@ -323,9 +323,9 @@ func TestNetworkStatus(t *testing.T) {
 				GenesisBlockIdentifier: MainnetGenesisBlockIdentifier,
 				Peers: []*types.Peer{
 					{
-						PeerID: "77.93.223.9:8333",
+						PeerID: "77.93.223.9:3889",
 						Metadata: forceMarshalMap(t, &PeerInfo{
-							Addr:           "77.93.223.9:8333",
+							Addr:           "77.93.223.9:3889",
 							Version:        70015,
 							SubVer:         "/Satoshi:0.14.2/",
 							StartingHeight: 643579,
@@ -338,9 +338,9 @@ func TestNetworkStatus(t *testing.T) {
 						}),
 					},
 					{
-						PeerID: "172.105.93.179:8333",
+						PeerID: "172.105.93.179:3889",
 						Metadata: forceMarshalMap(t, &PeerInfo{
-							Addr:           "172.105.93.179:8333",
+							Addr:           "172.105.93.179:3889",
 							RelayTxes:      true,
 							LastSend:       1597606678,
 							LastRecv:       1597606676,
@@ -447,9 +447,9 @@ func TestGetPeers(t *testing.T) {
 			},
 			expectedPeers: []*types.Peer{
 				{
-					PeerID: "77.93.223.9:8333",
+					PeerID: "77.93.223.9:3889",
 					Metadata: forceMarshalMap(t, &PeerInfo{
-						Addr:           "77.93.223.9:8333",
+						Addr:           "77.93.223.9:3889",
 						Version:        70015,
 						SubVer:         "/Satoshi:0.14.2/",
 						StartingHeight: 643579,
@@ -462,9 +462,9 @@ func TestGetPeers(t *testing.T) {
 					}),
 				},
 				{
-					PeerID: "172.105.93.179:8333",
+					PeerID: "172.105.93.179:3889",
 					Metadata: forceMarshalMap(t, &PeerInfo{
-						Addr:           "172.105.93.179:8333",
+						Addr:           "172.105.93.179:3889",
 						RelayTxes:      true,
 						LastSend:       1597606678,
 						LastRecv:       1597606676,

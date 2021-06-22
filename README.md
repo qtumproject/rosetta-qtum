@@ -61,7 +61,7 @@ at port `8080`.
 
 #### Mainnet:Online
 ```text
-docker run -d --rm --ulimit "nofile=100000:100000" -v "$(pwd)/mainnetdata:/data" -e "MODE=ONLINE" -e "NETWORK=MAINNET" -e "PORT=8080" -p 8080:8080 -p 8333:8333 rosetta-qtum:latest
+docker run -d --rm --ulimit "nofile=100000:100000" -v "$(pwd)/mainnetdata:/data" -e "MODE=ONLINE" -e "NETWORK=MAINNET" -e "PORT=8080" -p 8080:8080 -p 3889:3889 rosetta-qtum:latest
 ```
 _If you cloned the repository, you can run `make run-mainnet-online`._
 
@@ -73,7 +73,7 @@ _If you cloned the repository, you can run `make run-mainnet-offline`._
 
 #### Testnet:Online
 ```text
-docker run -d --rm --ulimit "nofile=100000:100000" -v "$(pwd)/testnetdata:/data" -e "MODE=ONLINE" -e "NETWORK=TESTNET" -e "PORT=8080" -p 8080:8080 -p 18333:18333 rosetta-qtum:latest
+docker run -d --rm --ulimit "nofile=100000:100000" -v "$(pwd)/testnetdata:/data" -e "MODE=ONLINE" -e "NETWORK=TESTNET" -e "PORT=8080" -p 8080:8080 -p 13889:13889 rosetta-qtum:latest
 ```
 _If you cloned the repository, you can run `make run-testnet-online`._
 

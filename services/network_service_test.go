@@ -104,7 +104,7 @@ func TestNetworkEndpoints_Online(t *testing.T) {
 	}
 	mockClient.On("GetPeers", ctx).Return([]*types.Peer{
 		{
-			PeerID: "77.93.223.9:8333",
+			PeerID: "77.93.223.9:3889",
 		},
 	}, nil)
 	mockIndexer.On(
@@ -122,7 +122,7 @@ func TestNetworkEndpoints_Online(t *testing.T) {
 		CurrentBlockIdentifier: blockResponse.Block.BlockIdentifier,
 		Peers: []*types.Peer{
 			{
-				PeerID: "77.93.223.9:8333",
+				PeerID: "77.93.223.9:3889",
 			},
 		},
 	}, networkStatus)
