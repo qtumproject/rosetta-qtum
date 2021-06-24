@@ -163,6 +163,8 @@ func LoadConfiguration(baseDirectory string) (*Configuration, error) {
 
 	qtumTestNetParams.PubKeyHashAddrID = 120
 	qtumTestNetParams.ScriptHashAddrID = 110
+	qtumTestNetParams.PrivateKeyID = 239
+	qtumTestNetParams.Bech32HRPSegwit = "tq"
 
 	networkValue := os.Getenv(NetworkEnv)
 	switch networkValue {
