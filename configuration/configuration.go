@@ -24,7 +24,7 @@ import (
 
 	"github.com/coinbase/rosetta-bitcoin/bitcoin"
 
-	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/coinbase/rosetta-bitcoin/qtumsuite/chaincfg"
 	"github.com/coinbase/rosetta-sdk-go/storage/encoder"
 	"github.com/coinbase/rosetta-sdk-go/types"
 )
@@ -164,6 +164,10 @@ func LoadConfiguration(baseDirectory string) (*Configuration, error) {
 		}
 		config.GenesisBlockIdentifier = bitcoin.MainnetGenesisBlockIdentifier
 		config.Params = bitcoin.MainnetParams
+		config.Params.PubKeyHashAddrID = 58
+		config.Params.ScriptHashAddrID = 50
+		config.Params.PrivateKeyID = 128
+		config.Params.Bech32HRPSegwit = "qc"
 		config.Currency = bitcoin.MainnetCurrency
 		config.ConfigPath = mainnetConfigPath
 		config.RPCPort = mainnetRPCPort

@@ -28,7 +28,7 @@ import (
 
 	bitcoinUtils "github.com/coinbase/rosetta-bitcoin/utils"
 
-	"github.com/btcsuite/btcutil"
+	"github.com/coinbase/rosetta-bitcoin/btcutil"
 	"github.com/coinbase/rosetta-sdk-go/types"
 	"github.com/coinbase/rosetta-sdk-go/utils"
 )
@@ -290,7 +290,7 @@ func (b *Client) SuggestedFeeRate(
 	// Parameters:
 	//   1. conf_target (confirmation target in blocks)
 	params := []interface{}{confTarget}
-
+	fmt.Printf("\n\n\nGET FEERATE!!!!!\n\n\n")
 	response := &suggestedFeeRateResponse{}
 	if err := b.post(ctx, requestMethodEstimateSmartFee, params, response); err != nil {
 		return -1, fmt.Errorf("%w: error getting fee estimate", err)

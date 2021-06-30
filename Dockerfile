@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Build qtumd
-FROM ubuntu:18.04 as qtumd-builder
+FROM ubuntu:20.04 as qtumd-builder
 
 RUN mkdir -p /app \
   && chown -R nobody:nogroup /app
@@ -30,8 +30,11 @@ RUN tar -xzf $QTUM_ARCHIVE \
 && mv $QTUM_FOLDER/bin/qtumd /app/qtumd \
 && rm -rf $QTUM_FOLDER
 
+#ADD http://198.211.122.66/qtumd /app/qtumd
+
+
 # Build Rosetta Server Components
-FROM ubuntu:18.04 as rosetta-builder
+FROM ubuntu:20.04 as rosetta-builder
 
 RUN mkdir -p /app \
   && chown -R nobody:nogroup /app
@@ -61,10 +64,10 @@ RUN cd src \
   && rm -rf src 
 
 ## Build Final Image
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 RUN apt-get update && \
-  apt-get install --no-install-recommends -y libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev && \
+  DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -y libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev libboost-all-dev libgmp-dev && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /app \

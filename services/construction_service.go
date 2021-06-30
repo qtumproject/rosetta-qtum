@@ -27,10 +27,12 @@ import (
 	"github.com/coinbase/rosetta-bitcoin/bitcoin"
 	"github.com/coinbase/rosetta-bitcoin/configuration"
 
-	"github.com/btcsuite/btcd/btcec"
-	"github.com/btcsuite/btcd/txscript"
-	"github.com/btcsuite/btcd/wire"
-	"github.com/btcsuite/btcutil"
+	"github.com/coinbase/rosetta-bitcoin/qtumsuite/btcec"
+	"github.com/coinbase/rosetta-bitcoin/qtumsuite/txscript"
+	"github.com/coinbase/rosetta-bitcoin/qtumsuite/wire"
+
+	"github.com/coinbase/rosetta-bitcoin/btcutil"
+
 	"github.com/coinbase/rosetta-sdk-go/parser"
 	"github.com/coinbase/rosetta-sdk-go/server"
 	"github.com/coinbase/rosetta-sdk-go/types"
@@ -96,6 +98,7 @@ func (s *ConstructionAPIService) estimateSize(operations []*types.Operation) flo
 		case bitcoin.OutputOpType:
 			size += bitcoin.OutputOverhead
 			addr, err := btcutil.DecodeAddress(operation.Account.Address, s.config.Params)
+			fmt.Printf("1\n")
 			if err != nil {
 				size += bitcoin.P2PKHScriptPubkeySize
 				continue
@@ -186,7 +189,9 @@ func (s *ConstructionAPIService) ConstructionMetadata(
 	// Determine feePerKB and ensure it is not below the minimum fee
 	// relay rate.
 	feePerKB, err := s.client.SuggestedFeeRate(ctx, defaultConfirmationTarget)
+	fmt.Printf("\n\nFeePerKB: %d\n\n", feePerKB)
 	if err != nil {
+		fmt.Printf("\n\nCould not get feerate!\n\n")
 		return nil, wrapErr(ErrCouldNotGetFeeRate, err)
 	}
 	if options.FeeMultiplier != nil {
@@ -284,6 +289,8 @@ func (s *ConstructionAPIService) ConstructionPayloads(
 
 	for i, output := range matches[1].Operations {
 		addr, err := btcutil.DecodeAddress(output.Account.Address, s.config.Params)
+		fmt.Printf("2\n")
+		fmt.Printf("%d %s\n", s.config.Params.PubKeyHashAddrID, s.config.Params.Bech32HRPSegwit)
 		if err != nil {
 			return nil, wrapErr(ErrUnableToDecodeAddress, fmt.Errorf(
 				"%w unable to decode address %s",
@@ -294,6 +301,7 @@ func (s *ConstructionAPIService) ConstructionPayloads(
 		}
 
 		pkScript, err := txscript.PayToAddrScript(addr)
+		fmt.Printf("3\n")
 		if err != nil {
 			return nil, wrapErr(
 				ErrUnableToDecodeAddress,
@@ -325,6 +333,7 @@ func (s *ConstructionAPIService) ConstructionPayloads(
 		}
 
 		class, _, err := bitcoin.ParseSingleAddress(s.config.Params, script)
+		fmt.Printf("4\n")
 		if err != nil {
 			return nil, wrapErr(
 				ErrUnableToDecodeAddress,
@@ -440,6 +449,7 @@ func (s *ConstructionAPIService) ConstructionCombine(
 		}
 
 		class, _, err := bitcoin.ParseSingleAddress(s.config.Params, decodedScript)
+		fmt.Printf("5\n")
 		if err != nil {
 			return nil, wrapErr(
 				ErrUnableToDecodeAddress,
@@ -593,6 +603,7 @@ func (s *ConstructionAPIService) parseUnsignedTransaction(
 	for i, output := range tx.TxOut {
 		networkIndex := int64(i)
 		_, addr, err := bitcoin.ParseSingleAddress(s.config.Params, output.PkScript)
+		fmt.Printf("6\n")
 		if err != nil {
 			return nil, wrapErr(
 				ErrUnableToDecodeAddress,
@@ -669,6 +680,7 @@ func (s *ConstructionAPIService) parseSignedTransaction(
 		}
 
 		_, addr, err := bitcoin.ParseSingleAddress(s.config.Params, pkScript.Script())
+		fmt.Printf("7\n")
 		if err != nil {
 			return nil, wrapErr(
 				ErrUnableToDecodeAddress,
@@ -709,6 +721,7 @@ func (s *ConstructionAPIService) parseSignedTransaction(
 	for i, output := range tx.TxOut {
 		networkIndex := int64(i)
 		_, addr, err := bitcoin.ParseSingleAddress(s.config.Params, output.PkScript)
+		fmt.Printf("8\n")
 		if err != nil {
 			return nil, wrapErr(
 				ErrUnableToDecodeAddress,
