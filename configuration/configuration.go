@@ -22,9 +22,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/coinbase/rosetta-bitcoin/bitcoin"
+	"github.com/qtumproject/rosetta-qtum/bitcoin"
 
-	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg"
 	"github.com/coinbase/rosetta-sdk-go/storage/encoder"
 	"github.com/coinbase/rosetta-sdk-go/types"
 )
@@ -50,11 +50,11 @@ const (
 
 	// mainnetConfigPath is the path of the Bitcoin
 	// configuration file for mainnet.
-	mainnetConfigPath = "/app/bitcoin-mainnet.conf"
+	mainnetConfigPath = "/app/qtum-mainnet.conf"
 
 	// testnetConfigPath is the path of the Bitcoin
 	// configuration file for testnet.
-	testnetConfigPath = "/app/bitcoin-testnet.conf"
+	testnetConfigPath = "/app/qtum-testnet.conf"
 
 	// Zstandard compression dictionaries
 	transactionNamespace         = "transaction"
@@ -79,7 +79,7 @@ const (
 	// persistent data.
 	DataDirectory = "/data"
 
-	bitcoindPath = "bitcoind"
+	bitcoindPath = "qtumd"
 	indexerPath  = "indexer"
 
 	// allFilePermissions specifies anyone can do anything
