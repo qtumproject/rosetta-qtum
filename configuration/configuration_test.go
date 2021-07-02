@@ -29,6 +29,17 @@ import (
 )
 
 func TestLoadConfiguration(t *testing.T) {
+	var qtumMainNetParams = bitcoin.MainnetParams
+	var qtumTestNetParams = bitcoin.MainnetParams
+
+	qtumMainNetParams.PubKeyHashAddrID = 58
+	qtumMainNetParams.ScriptHashAddrID = 50
+
+	qtumTestNetParams.PubKeyHashAddrID = 120
+	qtumTestNetParams.ScriptHashAddrID = 110
+	qtumTestNetParams.PrivateKeyID = 239
+	qtumTestNetParams.Bech32HRPSegwit = "tq"
+
 	tests := map[string]struct {
 		Mode    string
 		Network string
@@ -59,7 +70,7 @@ func TestLoadConfiguration(t *testing.T) {
 					Network:    bitcoin.MainnetNetwork,
 					Blockchain: bitcoin.Blockchain,
 				},
-				Params:                 bitcoin.MainnetParams,
+				Params:                 qtumMainNetParams,
 				Currency:               bitcoin.MainnetCurrency,
 				GenesisBlockIdentifier: bitcoin.MainnetGenesisBlockIdentifier,
 				Port:                   1000,
@@ -88,7 +99,7 @@ func TestLoadConfiguration(t *testing.T) {
 					Network:    bitcoin.TestnetNetwork,
 					Blockchain: bitcoin.Blockchain,
 				},
-				Params:                 bitcoin.TestnetParams,
+				Params:                 qtumTestNetParams,
 				Currency:               bitcoin.TestnetCurrency,
 				GenesisBlockIdentifier: bitcoin.TestnetGenesisBlockIdentifier,
 				Port:                   1000,
@@ -143,7 +154,7 @@ func TestLoadConfiguration(t *testing.T) {
 				assert.Contains(t, err.Error(), test.err.Error())
 			} else {
 				test.cfg.IndexerPath = path.Join(newDir, "indexer")
-				test.cfg.BitcoindPath = path.Join(newDir, "bitcoind")
+				test.cfg.BitcoindPath = path.Join(newDir, "qtumd")
 				assert.Equal(t, test.cfg, cfg)
 				assert.NoError(t, err)
 			}
