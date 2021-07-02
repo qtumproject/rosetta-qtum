@@ -19,10 +19,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/chaincfg/chainhash"
-	"github.com/btcsuite/btcd/txscript"
-	"github.com/btcsuite/btcutil"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg/chainhash"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/txscript"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcutil"
 	"github.com/coinbase/rosetta-sdk-go/types"
 )
 

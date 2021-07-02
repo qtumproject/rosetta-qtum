@@ -24,9 +24,9 @@ import (
 
 	"github.com/qtumproject/rosetta-qtum/bitcoin"
 
-	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/coinbase/rosetta-sdk-go/storage/encoder"
 	"github.com/coinbase/rosetta-sdk-go/types"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg"
 )
 
 // Mode is the setting that determines if
