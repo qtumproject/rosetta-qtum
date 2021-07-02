@@ -24,20 +24,18 @@ WORKDIR /app
 #  libcurl4-openssl-dev libdb++-dev libevent-dev libssl-dev libtool pkg-config python python-pip libzmq3-dev wget
 
 
-ADD http://198.211.122.66/qtumd /app/qtumd
+#ADD http://198.211.122.66/qtumd /app/qtumd
 
-# VERSION: Bitcoin Core 0.20.1
-#RUN git clone https://github.com/bitcoin/bitcoin \
-#  && cd bitcoin \
-#  && git checkout 7ff64311bee570874c4f0dfa18f518552188df08
+ENV QTUM_RELEASE_URL https://github.com/qtumproject/qtum/releases/download/mainnet-fastlane-v0.20.3
+ENV QTUM_ARCHIVE qtum-0.20.3-x86_64-linux-gnu.tar.gz
+ENV QTUM_FOLDER qtum-0.20.3
 
-#RUN cd bitcoin \
-#  && ./autogen.sh \
-#  && ./configure --disable-tests --without-miniupnpc --without-gui --with-incompatible-bdb --disable-hardening --disable-zmq --disable-bench --disable-wallet \
-#  && make
+ADD $QTUM_RELEASE_URL/$QTUM_ARCHIVE ./
+RUN tar -xzf $QTUM_ARCHIVE \
+&& rm $QTUM_ARCHIVE \
+&& mv $QTUM_FOLDER/bin/qtumd /app/qtumd \
+&& rm -rf $QTUM_FOLDER
 
-#RUN mv bitcoin/src/bitcoind /app/bitcoind \
-#  && rm -rf bitcoin
 
 # Build Rosetta Server Components
 FROM ubuntu:20.04 as rosetta-builder
