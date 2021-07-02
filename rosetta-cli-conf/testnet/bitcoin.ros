@@ -1,6 +1,6 @@
 request_funds(1){
   find_account{
-    currency = {"symbol":"tBTC", "decimals":8};
+    currency = {"symbol":"tQTUM", "decimals":8};
     random_account = find_balance({
       "minimum_balance":{
         "value": "0",
@@ -27,7 +27,7 @@ request_funds(1){
 
 create_account(1){
   create{
-    network = {"network":"Testnet3", "blockchain":"Bitcoin"};
+    network = {"network":"Testnet3", "blockchain":"Qtum"};
     key = generate_key({"curve_type": "secp256k1"});
     account = derive({
       "network_identifier": {{network}},
@@ -44,18 +44,21 @@ create_account(1){
 
 transfer(10){
   transfer_dry_run{
-    transfer_dry_run.network = {"network":"Testnet3", "blockchain":"Bitcoin"};
-    currency = {"symbol":"tBTC", "decimals":8};
+    transfer_dry_run.network = {"network":"Testnet3", "blockchain":"Qtum"};
+    currency = {"symbol":"tQTUM", "decimals":8};
+
+    // QTUM: the dust relay fee in QTUM is set to 400000 sat/kb in bitcoin it is set to 3000 sat/kb
+    // We therefore multiply all values below by 400/3 to adjust the values for QTUM
 
     // We set the max_fee_amount to know how much buffer we should
     // leave for fee payment when selecting a sender account.
-    dust_amount = "600";
-    max_fee_amount = "1200";
+    dust_amount = "80000"; //"600";
+    max_fee_amount = "160000"; //"1200";
     send_buffer = {{dust_amount}} + {{max_fee_amount}};
 
     // We look for a coin of value >= the reserved_amount to create
     // a transfer with change (reserved_amount is max_fee_amount + dust_amount x 2).
-    reserved_amount = "2400";
+    reserved_amount = "320000"; //"2400";
     sender = find_balance({
       "minimum_balance":{
         "value": {{reserved_amount}},
@@ -165,13 +168,13 @@ transfer(10){
 
 return_funds(10){
   transfer_dry_run{
-    transfer_dry_run.network = {"network":"Testnet3", "blockchain":"Bitcoin"};
-    currency = {"symbol":"tBTC", "decimals":8};
+    transfer_dry_run.network = {"network":"Testnet3", "blockchain":"Qtum"};
+    currency = {"symbol":"tQTUM", "decimals":8};
 
     // We look for a sender that is able to pay the 
     // max_fee_amount + min_utxo size (reserved_amount is max_fee_amount + min_utxo size).
-    max_fee_amount = "1200";
-    reserved_amount = "1800";
+    max_fee_amount = "160000"; //"1200";
+    reserved_amount = "240000"; //"1800";
     sender = find_balance({
       "minimum_balance":{
         "value": {{reserved_amount}},
@@ -221,7 +224,7 @@ return_funds(10){
     // We calculate the recipient_amount using the new suggested_fee
     // and assert that it is above the minimum UTXO size.
     recipient_amount = {{sender.balance.value}} - {{suggested_fee.value}};
-    dust_amount = "600";
+    dust_amount = "80000"; //"600";
     recipient_minus_dust = {{recipient_amount}} - {{dust_amount}};
     assert({{recipient_minus_dust}});
 
