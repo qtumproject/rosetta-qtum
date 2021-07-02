@@ -24,9 +24,9 @@ import (
 
 	"github.com/qtumproject/rosetta-qtum/bitcoin"
 
-	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg"
 	"github.com/coinbase/rosetta-sdk-go/storage/encoder"
 	"github.com/coinbase/rosetta-sdk-go/types"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg"
 )
 
 // Mode is the setting that determines if
@@ -61,8 +61,8 @@ const (
 	testnetTransactionDictionary = "/app/testnet-transaction.zstd"
 	mainnetTransactionDictionary = "/app/mainnet-transaction.zstd"
 
-	mainnetRPCPort = 8332
-	testnetRPCPort = 18332
+	mainnetRPCPort = 3889
+	testnetRPCPort = 13889
 
 	// min prune depth is 288:
 	// https://github.com/bitcoin/bitcoin/blob/ad2952d17a2af419a04256b10b53c7377f826a27/src/validation.h#L84
