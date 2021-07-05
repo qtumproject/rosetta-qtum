@@ -41,10 +41,13 @@ run-testnet-online:
 
 # TODO: temp testing
 run-t:
-	docker run --ulimit "nofile=${NOFILE}:${NOFILE}" -v "${PWD}/testnetdata:/data" -e "MODE=ONLINE" -e "NETWORK=TESTNET" -e "PORT=8080" -p 8080:8080 -p 13889:13889 rosetta-qtum:latest
+	docker run --rm --ulimit "nofile=${NOFILE}:${NOFILE}" -v "${PWD}/testnetdata:/data" -e "MODE=ONLINE" -e "NETWORK=TESTNET" -e "PORT=8080" -p 8080:8080 -p 13889:13889 rosetta-qtum:latest
 
 run-testnet-shell:
 	docker run --rm -it --ulimit "nofile=${NOFILE}:${NOFILE}" -v "${PWD}/testnetdata:/data" -e "MODE=ONLINE" -e "NETWORK=TESTNET" -e "PORT=8080" -p 8080:8080 -p 13889:13889 rosetta-qtum:latest bash
+
+run-testnet-qtumd-only:
+	docker run --rm -it --ulimit "nofile=${NOFILE}:${NOFILE}" -v "${PWD}/testnetdata:/data" -e "MODE=ONLINE" -e "NETWORK=TESTNET" -e "PORT=8080" -p 8080:8080 -p 13889:13889 rosetta-qtum:latest /app/qtumd --conf="/app/qtum-testnet.conf"
 
 run-testnet-offline:
 	docker run -d --rm -e "MODE=OFFLINE" -e "NETWORK=TESTNET" -e "PORT=8081" -p 8081:8081 rosetta-qtum:latest
