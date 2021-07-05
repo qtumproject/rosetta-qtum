@@ -5,7 +5,7 @@
 package bloom
 
 import (
-	"github.com/btcsuite/btcd/blockchain"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/blockchain"
 	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg/chainhash"
 	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/wire"
 	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcutil"
