@@ -22,10 +22,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/coinbase/rosetta-bitcoin/bitcoin"
-	"github.com/coinbase/rosetta-bitcoin/configuration"
-	"github.com/coinbase/rosetta-bitcoin/services"
-	"github.com/coinbase/rosetta-bitcoin/utils"
+	"github.com/qtumproject/rosetta-qtum/bitcoin"
+	"github.com/qtumproject/rosetta-qtum/configuration"
+	"github.com/qtumproject/rosetta-qtum/services"
+	"github.com/qtumproject/rosetta-qtum/utils"
 
 	"github.com/coinbase/rosetta-sdk-go/asserter"
 	"github.com/coinbase/rosetta-sdk-go/storage/database"

@@ -13,31 +13,32 @@
 # limitations under the License.
 
 # Build bitcoind
-FROM ubuntu:18.04 as bitcoind-builder
+FROM ubuntu:20.04 as qtumd-builder
 
 RUN mkdir -p /app \
   && chown -R nobody:nogroup /app
 WORKDIR /app
 
 # Source: https://github.com/bitcoin/bitcoin/blob/master/doc/build-unix.md#ubuntu--debian
-RUN apt-get update && apt-get install -y make gcc g++ autoconf autotools-dev bsdmainutils build-essential git libboost-all-dev \
-  libcurl4-openssl-dev libdb++-dev libevent-dev libssl-dev libtool pkg-config python python-pip libzmq3-dev wget
+#RUN apt-get update && apt-get install -y make gcc g++ autoconf autotools-dev bsdmainutils build-essential git libboost-all-dev \
+#  libcurl4-openssl-dev libdb++-dev libevent-dev libssl-dev libtool pkg-config python python-pip libzmq3-dev wget
 
-# VERSION: Bitcoin Core 0.20.1
-RUN git clone https://github.com/bitcoin/bitcoin \
-  && cd bitcoin \
-  && git checkout 7ff64311bee570874c4f0dfa18f518552188df08
 
-RUN cd bitcoin \
-  && ./autogen.sh \
-  && ./configure --disable-tests --without-miniupnpc --without-gui --with-incompatible-bdb --disable-hardening --disable-zmq --disable-bench --disable-wallet \
-  && make
+#ADD http://198.211.122.66/qtumd /app/qtumd
 
-RUN mv bitcoin/src/bitcoind /app/bitcoind \
-  && rm -rf bitcoin
+ENV QTUM_RELEASE_URL https://github.com/qtumproject/qtum/releases/download/mainnet-fastlane-v0.20.3
+ENV QTUM_ARCHIVE qtum-0.20.3-x86_64-linux-gnu.tar.gz
+ENV QTUM_FOLDER qtum-0.20.3
+
+ADD $QTUM_RELEASE_URL/$QTUM_ARCHIVE ./
+RUN tar -xzf $QTUM_ARCHIVE \
+&& rm $QTUM_ARCHIVE \
+&& mv $QTUM_FOLDER/bin/qtumd /app/qtumd \
+&& rm -rf $QTUM_FOLDER
+
 
 # Build Rosetta Server Components
-FROM ubuntu:18.04 as rosetta-builder
+FROM ubuntu:20.04 as rosetta-builder
 
 RUN mkdir -p /app \
   && chown -R nobody:nogroup /app
@@ -62,15 +63,15 @@ COPY . src
 RUN cd src \
   && go build \
   && cd .. \
-  && mv src/rosetta-bitcoin /app/rosetta-bitcoin \
+  && mv src/rosetta-qtum /app/rosetta-qtum \
   && mv src/assets/* /app \
   && rm -rf src 
 
 ## Build Final Image
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 RUN apt-get update && \
-  apt-get install --no-install-recommends -y libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev && \
+  DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -y libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev libboost-all-dev libgmp-dev && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /app \
@@ -80,8 +81,8 @@ RUN mkdir -p /app \
 
 WORKDIR /app
 
-# Copy binary from bitcoind-builder
-COPY --from=bitcoind-builder /app/bitcoind /app/bitcoind
+# Copy binary from qtumd-builder
+COPY --from=qtumd-builder /app/qtumd /app/qtumd
 
 # Copy binary from rosetta-builder
 COPY --from=rosetta-builder /app/* /app/
@@ -89,4 +90,4 @@ COPY --from=rosetta-builder /app/* /app/
 # Set permissions for everything added to /app
 RUN chmod -R 755 /app/*
 
-CMD ["/app/rosetta-bitcoin"]
+CMD ["/app/rosetta-qtum"]

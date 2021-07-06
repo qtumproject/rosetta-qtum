@@ -26,9 +26,9 @@ import (
 	"strconv"
 	"time"
 
-	bitcoinUtils "github.com/coinbase/rosetta-bitcoin/utils"
+	bitcoinUtils "github.com/qtumproject/rosetta-qtum/utils"
 
-	"github.com/btcsuite/btcutil"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcutil"
 	"github.com/coinbase/rosetta-sdk-go/types"
 	"github.com/coinbase/rosetta-sdk-go/utils"
 )
@@ -753,7 +753,7 @@ func (b *Client) parseInputTransactionOperation(
 }
 
 // parseAmount returns the atomic value of the specified amount.
-// https://godoc.org/github.com/btcsuite/btcutil#NewAmount
+// https://godoc.org/github.com/qtumproject/rosetta-qtum/qtumsuite/btcutil#NewAmount
 func (b *Client) parseAmount(amount float64) (uint64, error) {
 	atomicAmount, err := btcutil.NewAmount(amount)
 	if err != nil {

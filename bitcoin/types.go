@@ -18,13 +18,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg"
 	"github.com/coinbase/rosetta-sdk-go/types"
 )
 
 const (
 	// Blockchain is Bitcoin.
-	Blockchain string = "Bitcoin"
+	Blockchain string = "Qtum"
 
 	// MainnetNetwork is the value of the network
 	// in MainnetNetworkIdentifier.
@@ -78,17 +78,17 @@ const (
 // Fee estimate constants
 // Source: https://bitcoinops.org/en/tools/calc-size/
 const (
-	MinFeeRate            = float64(0.00001) // nolint:gomnd
-	TransactionOverhead   = 12               // 4 version, 2 segwit flag, 1 vin, 1 vout, 4 lock time
-	InputSize             = 68               // 4 prev index, 32 prev hash, 4 sequence, 1 script size, ~27 script witness
-	OutputOverhead        = 9                // 8 value, 1 script size
-	P2PKHScriptPubkeySize = 25               // P2PKH size
+	MinFeeRate            = float64(0.004) // nolint:gomnd
+	TransactionOverhead   = 12             // 4 version, 2 segwit flag, 1 vin, 1 vout, 4 lock time
+	InputSize             = 68             // 4 prev index, 32 prev hash, 4 sequence, 1 script size, ~27 script witness
+	OutputOverhead        = 9              // 8 value, 1 script size
+	P2PKHScriptPubkeySize = 25             // P2PKH size
 )
 
 var (
 	// MainnetGenesisBlockIdentifier is the genesis block for mainnet.
 	MainnetGenesisBlockIdentifier = &types.BlockIdentifier{
-		Hash: "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f",
+		Hash: "000075aef83cf2853580f8ae8ce6f8c3096cfa21d98334d6e3f95e5582ed986c",
 	}
 
 	// MainnetParams are the params for mainnet.
@@ -96,13 +96,13 @@ var (
 
 	// MainnetCurrency is the *types.Currency for mainnet.
 	MainnetCurrency = &types.Currency{
-		Symbol:   "BTC",
+		Symbol:   "QTUM",
 		Decimals: Decimals,
 	}
 
 	// TestnetGenesisBlockIdentifier is the genesis block for testnet.
 	TestnetGenesisBlockIdentifier = &types.BlockIdentifier{
-		Hash: "000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943",
+		Hash: "0000e803ee215c0684ca0d2f9220594d3f828617972aad66feb2ba51f5e14222",
 	}
 
 	// TestnetParams are the params for testnet.
@@ -110,7 +110,7 @@ var (
 
 	// TestnetCurrency is the *types.Currency for testnet.
 	TestnetCurrency = &types.Currency{
-		Symbol:   "tBTC",
+		Symbol:   "tQTUM",
 		Decimals: Decimals,
 	}
 

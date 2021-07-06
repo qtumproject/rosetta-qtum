@@ -19,9 +19,9 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/coinbase/rosetta-bitcoin/bitcoin"
-	"github.com/coinbase/rosetta-bitcoin/configuration"
-	mocks "github.com/coinbase/rosetta-bitcoin/mocks/services"
+	"github.com/qtumproject/rosetta-qtum/bitcoin"
+	"github.com/qtumproject/rosetta-qtum/configuration"
+	mocks "github.com/qtumproject/rosetta-qtum/mocks/services"
 
 	"github.com/coinbase/rosetta-sdk-go/types"
 	"github.com/stretchr/testify/assert"
@@ -78,7 +78,7 @@ func TestConstructionService(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, &types.ConstructionDeriveResponse{
 		AccountIdentifier: &types.AccountIdentifier{
-			Address: "tb1qcqzmqzkswhfshzd8kedhmtvgnxax48z4fklhvm",
+			Address: "tq1qcqzmqzkswhfshzd8kedhmtvgnxax48z4d4xkx5",
 		},
 	}, deriveResponse)
 
@@ -90,7 +90,7 @@ func TestConstructionService(t *testing.T) {
 			},
 			Type: bitcoin.InputOpType,
 			Account: &types.AccountIdentifier{
-				Address: "tb1qcqzmqzkswhfshzd8kedhmtvgnxax48z4fklhvm",
+				Address: "tq1qcqzmqzkswhfshzd8kedhmtvgnxax48z4d4xkx5",
 			},
 			Amount: &types.Amount{
 				Value:    "-1000000",
@@ -109,7 +109,7 @@ func TestConstructionService(t *testing.T) {
 			},
 			Type: bitcoin.OutputOpType,
 			Account: &types.AccountIdentifier{
-				Address: "tb1q3r8xjf0c2yazxnq9ey3wayelygfjxpfqjvj5v7",
+				Address: "tq1q3r8xjf0c2yazxnq9ey3wayelygfjxpfqk0t4x3",
 			},
 			Amount: &types.Amount{
 				Value:    "954843",
@@ -122,7 +122,7 @@ func TestConstructionService(t *testing.T) {
 			},
 			Type: bitcoin.OutputOpType,
 			Account: &types.AccountIdentifier{
-				Address: "tb1qjsrjvk2ug872pdypp33fjxke62y7awpgefr6ua",
+				Address: "tq1qjsrjvk2ug872pdypp33fjxke62y7awpga26mkj",
 			},
 			Amount: &types.Amount{
 				Value:    "44657",
@@ -168,7 +168,7 @@ func TestConstructionService(t *testing.T) {
 				RequiredSigs: 1,
 				Type:         "witness_v0_keyhash",
 				Addresses: []string{
-					"tb1qcqzmqzkswhfshzd8kedhmtvgnxax48z4fklhvm",
+					"tq1qcqzmqzkswhfshzd8kedhmtvgnxax48z4d4xkx5",
 				},
 			},
 		},
@@ -200,7 +200,7 @@ func TestConstructionService(t *testing.T) {
 		Metadata: forceMarshalMap(t, metadata),
 		SuggestedFee: []*types.Amount{
 			{
-				Value:    "1065", // 1,420 * 0.75
+				Value:    "426000", // 1,420 * 0.75
 				Currency: bitcoin.TestnetCurrency,
 			},
 		},
@@ -232,14 +232,14 @@ func TestConstructionService(t *testing.T) {
 		Metadata: forceMarshalMap(t, metadata),
 		SuggestedFee: []*types.Amount{
 			{
-				Value:    "142", // we don't go below minimum fee rate
+				Value:    "56800", // we don't go below minimum fee rate
 				Currency: bitcoin.TestnetCurrency,
 			},
 		},
 	}, metadataResponse)
 
 	// Test Payloads
-	unsignedRaw := "7b227472616e73616374696f6e223a2230313030303030303031376639636635306230326464353235386638306364356333343337333032653032376464313333363137326132306364633830333035633561353537343162313031303030303030303066666666666666663032646239313065303030303030303030303136303031343838636536393235663835313361323334633035633932326565393333663232313332333035323037316165303030303030303030303030313630303134393430373236353935633431666361306234383130633632393931616439643238396565623832383030303030303030222c227363726970745075624b657973223a5b7b2261736d223a22302063303035623030616430373564333062383961376236356237646164383839396261366139633535222c22686578223a223030313463303035623030616430373564333062383961376236356237646164383839396261366139633535222c2272657153696773223a312c2274797065223a227769746e6573735f76305f6b657968617368222c22616464726573736573223a5b227462317163717a6d717a6b7377686673687a64386b6564686d7476676e78617834387a34666b6c68766d225d7d5d2c22696e7075745f616d6f756e7473223a5b222d31303030303030225d2c22696e7075745f616464726573736573223a5b227462317163717a6d717a6b7377686673687a64386b6564686d7476676e78617834387a34666b6c68766d225d7d" // nolint
+	unsignedRaw := "7b227472616e73616374696f6e223a2230313030303030303031376639636635306230326464353235386638306364356333343337333032653032376464313333363137326132306364633830333035633561353537343162313031303030303030303066666666666666663032646239313065303030303030303030303136303031343838636536393235663835313361323334633035633932326565393333663232313332333035323037316165303030303030303030303030313630303134393430373236353935633431666361306234383130633632393931616439643238396565623832383030303030303030222c227363726970745075624b657973223a5b7b2261736d223a22302063303035623030616430373564333062383961376236356237646164383839396261366139633535222c22686578223a223030313463303035623030616430373564333062383961376236356237646164383839396261366139633535222c2272657153696773223a312c2274797065223a227769746e6573735f76305f6b657968617368222c22616464726573736573223a5b227471317163717a6d717a6b7377686673687a64386b6564686d7476676e78617834387a346434786b7835225d7d5d2c22696e7075745f616d6f756e7473223a5b222d31303030303030225d2c22696e7075745f616464726573736573223a5b227471317163717a6d717a6b7377686673687a64386b6564686d7476676e78617834387a346434786b7835225d7d" // nolint
 	payloadsResponse, err := servicer.ConstructionPayloads(ctx, &types.ConstructionPayloadsRequest{
 		NetworkIdentifier: networkIdentifier,
 		Operations:        ops,
@@ -255,7 +255,7 @@ func TestConstructionService(t *testing.T) {
 			},
 			Type: bitcoin.InputOpType,
 			Account: &types.AccountIdentifier{
-				Address: "tb1qcqzmqzkswhfshzd8kedhmtvgnxax48z4fklhvm",
+				Address: "tq1qcqzmqzkswhfshzd8kedhmtvgnxax48z4d4xkx5",
 			},
 			Amount: &types.Amount{
 				Value:    "-1000000",
@@ -275,7 +275,7 @@ func TestConstructionService(t *testing.T) {
 			},
 			Type: bitcoin.OutputOpType,
 			Account: &types.AccountIdentifier{
-				Address: "tb1q3r8xjf0c2yazxnq9ey3wayelygfjxpfqjvj5v7",
+				Address: "tq1q3r8xjf0c2yazxnq9ey3wayelygfjxpfqk0t4x3",
 			},
 			Amount: &types.Amount{
 				Value:    "954843",
@@ -289,7 +289,7 @@ func TestConstructionService(t *testing.T) {
 			},
 			Type: bitcoin.OutputOpType,
 			Account: &types.AccountIdentifier{
-				Address: "tb1qjsrjvk2ug872pdypp33fjxke62y7awpgefr6ua",
+				Address: "tq1qjsrjvk2ug872pdypp33fjxke62y7awpga26mkj",
 			},
 			Amount: &types.Amount{
 				Value:    "44657",
@@ -305,7 +305,7 @@ func TestConstructionService(t *testing.T) {
 			"7b98f8b77fa6ef34044f320073118033afdffbd3fd3f8423889d9e5953ff4a30",
 		),
 		AccountIdentifier: &types.AccountIdentifier{
-			Address: "tb1qcqzmqzkswhfshzd8kedhmtvgnxax48z4fklhvm",
+			Address: "tq1qcqzmqzkswhfshzd8kedhmtvgnxax48z4d4xkx5",
 		},
 		SignatureType: types.Ecdsa,
 	}
@@ -358,7 +358,7 @@ func TestConstructionService(t *testing.T) {
 	assert.Equal(t, &types.ConstructionParseResponse{
 		Operations: parseOps,
 		AccountIdentifierSigners: []*types.AccountIdentifier{
-			{Address: "tb1qcqzmqzkswhfshzd8kedhmtvgnxax48z4fklhvm"},
+			{Address: "tq1qcqzmqzkswhfshzd8kedhmtvgnxax48z4d4xkx5"},
 		},
 	}, parseSignedResponse)
 
