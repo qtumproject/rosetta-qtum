@@ -4,7 +4,7 @@
   </a>
 </p>
 <h3 align="center">
-   Rosetta Bitcoin
+   Rosetta Qtum
 </h3>
 <p align="center">
   <a href="https://circleci.com/gh/coinbase/rosetta-bitcoin/tree/master"><img src="https://circleci.com/gh/coinbase/rosetta-bitcoin/tree/master.svg?style=shield" /></a>
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center"><b>
-ROSETTA-BITCOIN IS CONSIDERED <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha">ALPHA SOFTWARE</a>.
+ROSETTA-QTUM IS CONSIDERED <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha">ALPHA SOFTWARE</a>.
 USE AT YOUR OWN RISK! COINBASE ASSUMES NO RESPONSIBILITY NOR LIABILITY IF THERE IS A BUG IN THIS IMPLEMENTATION.
 </b></p>
 
@@ -91,6 +91,7 @@ This instance type has 8 vCPU and 16 GB of RAM.
 To increase the load `rosetta-qtum` can handle, it is recommended to tune your OS
 settings to allow for more connections. On a linux-based OS, you can run the following
 commands ([source](http://www.tweaked.io/guide/kernel)):
+
 ```text
 sysctl -w net.ipv4.tcp_tw_reuse=1
 sysctl -w net.core.rmem_max=16777216
@@ -116,7 +117,7 @@ on your OS. There is a great tutorial for how to do this on Linux [here](https:/
 ## Architecture
 `rosetta-qtum` uses the `syncer`, `storage`, `parser`, and `server` package
 from [`rosetta-sdk-go`](https://github.com/coinbase/rosetta-sdk-go) instead
-of a new Bitcoin-specific implementation of packages of similar functionality. Below
+of a new Qtum-specific implementation of packages of similar functionality. Below
 you can find a high-level overview of how everything fits together:
 ```text
                                +------------------------------------------------------------------+
