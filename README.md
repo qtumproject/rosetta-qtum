@@ -38,17 +38,8 @@ all Rosetta implementations must be deployable via Docker and support running vi
 DOCKER [HERE](https://www.docker.com/get-started).**
 
 ### Install
-Running the following commands will create a Docker image called `rosetta-qtum:latest`.
+Clone this repository and run the following command to create a Docker image called `rosetta-qtum:latest`.
 
-#### From GitHub
-To download the pre-built Docker image from the latest release, run:
-```text
-curl -sSfL https://raw.githubusercontent.com/coinbase/rosetta-qtum/master/install.sh | sh -s
-```
-_Do not try to install rosetta-qtum using GitHub Packages!_
-
-#### From Source
-After cloning this repository, run:
 ```text
 make build-local
 ```
