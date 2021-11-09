@@ -75,8 +75,8 @@ docker run -d --rm -e "MODE=OFFLINE" -e "NETWORK=TESTNET" -e "PORT=8081" -p 8081
 _If you cloned the repository, you can run `make run-testnet-offline`._
 
 ## System Requirements
-`rosetta-qtum` has been tested on an [AWS c5.2xlarge instance](https://aws.amazon.com/ec2/instance-types/c5).
-This instance type has 8 vCPU and 16 GB of RAM.
+`rosetta-qtum` has been tested on an GCP `T2d-standard-16` instance.
+This instance type has 16 vCPU with 64 gb of RAM, 10gb of swap and 100gb of ssd storage.
 
 ### Network Settings
 To increase the load `rosetta-qtum` can handle, it is recommended to tune your OS
