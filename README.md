@@ -29,34 +29,6 @@ information [here](https://rosetta-api.org).
 * UTXO cache for all accounts (accessible using the Rosetta `/account/balance` API)
 * Stateless, offline, curve-based transaction construction from any SegWit-Bech32 Address
 
-## System Requirements
-`rosetta-bitcoin` has been tested on an [AWS c5.2xlarge instance](https://aws.amazon.com/ec2/instance-types/c5).
-This instance type has 8 vCPU and 16 GB of RAM.
-
-### Network Settings
-To increase the load `rosetta-bitcoin` can handle, it is recommended to tune your OS
-settings to allow for more connections. On a linux-based OS, you can run the following commands ([source](http://www.tweaked.io/guide/kernel)):
-```text
-sysctl -w net.ipv4.tcp_tw_reuse=1
-sysctl -w net.core.rmem_max=16777216
-sysctl -w net.core.wmem_max=16777216
-sysctl -w net.ipv4.tcp_max_syn_backlog=10000
-sysctl -w net.core.somaxconn=10000
-sysctl -p (when done)
-```
-_We have not tested `rosetta-bitcoin` with `net.ipv4.tcp_tw_recycle` and do not recommend
-enabling it._
-
-You should also modify your open file settings to `100000`. This can be done on a linux-based OS
-with the command: `ulimit -n 100000`.
-
-### Memory-Mapped Files
-`rosetta-bitcoin` uses [memory-mapped files](https://en.wikipedia.org/wiki/Memory-mapped_file) to
-persist data in the `indexer`. As a result, you **must** run `rosetta-bitcoin` on a 64-bit
-architecture (the virtual address space easily exceeds 100s of GBs).
-
-If you receive a kernel OOM, you may need to increase the allocated size of swap space
-on your OS. There is a great tutorial for how to do this on Linux [here](https://linuxize.com/post/create-a-linux-swap-file/).
 
 ## Usage
 As specified in the [Rosetta API Principles](https://www.rosetta-api.org/docs/automated_deployment.html),
