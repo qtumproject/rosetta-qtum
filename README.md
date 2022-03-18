@@ -26,16 +26,16 @@ information [here](https://rosetta-api.org).
 
 ## Features
 * Rosetta API implementation (both Data API and Construction API)
-* UTXO cache for all accounts (accessible using `/account/balance`)
+* UTXO cache for all accounts (accessible using the Rosetta `/account/balance` API)
 * Stateless, offline, curve-based transaction construction from any SegWit-Bech32 Address
+
 
 ## Usage
 As specified in the [Rosetta API Principles](https://www.rosetta-api.org/docs/automated_deployment.html),
 all Rosetta implementations must be deployable via Docker and support running via either an
 [`online` or `offline` mode](https://www.rosetta-api.org/docs/node_deployment.html#multiple-modes).
 
-**YOU MUST INSTALL DOCKER FOR THE FOLLOWING INSTRUCTIONS TO WORK. YOU CAN DOWNLOAD
-DOCKER [HERE](https://www.docker.com/get-started).**
+**YOU MUST INSTALL DOCKER FOR THE FOLLOWING INSTRUCTIONS TO WORK. YOU CAN DOWNLOAD DOCKER [HERE](https://www.docker.com/get-started).**
 
 ### Install
 Clone this repository and run the following command to create a Docker image called `rosetta-qtum:latest`.
@@ -151,8 +151,7 @@ you can find a high-level overview of how everything fits together:
 ### Optimizations
 * Automatically prune qtumd while indexing blocks
 * Reduce sync time with concurrent block indexing
-* Use [Zstandard compression](https://github.com/facebook/zstd) to reduce the size of data stored on disk
-without needing to write a manual byte-level encoding
+* Use [Zstandard compression](https://github.com/facebook/zstd) to reduce the size of data stored on disk without needing to write a manual byte-level encoding
 
 #### Concurrent Block Syncing
 To speed up indexing, `rosetta-qtum` uses concurrent block processing
@@ -199,18 +198,13 @@ in recently processed blocks to save to disk.
 ## Testing with rosetta-cli
 To validate `rosetta-qtum`, [install `rosetta-cli`](https://github.com/coinbase/rosetta-cli#install)
 and run one of the following commands:
-* `rosetta-cli check:data --configuration-file rosetta-cli-conf/testnet/config.json`
-* `rosetta-cli check:construction --configuration-file rosetta-cli-conf/testnet/config.json`
-* `rosetta-cli check:data --configuration-file rosetta-cli-conf/mainnet/config.json`
+* `rosetta-cli check:data --configuration-file rosetta-cli-conf/testnet/config.json` - This command validates that the Data API information in the `testnet` network is correct. It also ensures that the implementation does not miss any balance-changing operations.
+* `rosetta-cli check:construction --configuration-file rosetta-cli-conf/testnet/config.json` - This command validates the blockchain’s construction, signing, and broadcasting.
+* `rosetta-cli check:data --configuration-file rosetta-cli-conf/mainnet/config.json` - This command validates that the Data API information in the `mainnet` network is correct. It also ensures that the implementation does not miss any balance-changing operations.
 
-## Future Work
-* Publish benchamrks for sync speed, storage usage, and load testing
-* [Rosetta API `/mempool/transaction`](https://www.rosetta-api.org/docs/MempoolApi.html#mempooltransaction) implementation
-* Add CI test using `rosetta-cli` to run on each PR (likely on a regtest network)
-* Add performance mode to use unlimited RAM (implementation currently optimized to use <= 16 GB of RAM)
-* Support Multi-Sig Sends
+## Issues
+Interested in helping fix issues in this repository? You can find to-dos in the [Issues](https://github.com/coinbase/rosetta-bitcoin/issues) section with the `help wanted` tag. Be sure to reach out on our [community](https://community.rosetta-api.org) before you tackle anything on this list.
 
-_Please reach out on our [community](https://community.rosetta-api.org) if you want to tackle anything on this list!_
 
 ## Development
 * `make deps` to install dependencies
