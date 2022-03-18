@@ -26,9 +26,9 @@ WORKDIR /app
 
 #ADD http://198.211.122.66/qtumd /app/qtumd
 
-ENV QTUM_RELEASE_URL https://github.com/qtumproject/qtum/releases/download/mainnet-fastlane-v0.20.3
-ENV QTUM_ARCHIVE qtum-0.20.3-x86_64-linux-gnu.tar.gz
-ENV QTUM_FOLDER qtum-0.20.3
+ENV QTUM_RELEASE_URL https://github.com/qtumproject/qtum/releases/download/mainnet-fastlane-v0.20.4
+ENV QTUM_ARCHIVE qtum-0.20.4-x86_64-linux-gnu.tar.gz
+ENV QTUM_FOLDER qtum-0.20.4
 
 ADD $QTUM_RELEASE_URL/$QTUM_ARCHIVE ./
 RUN tar -xzf $QTUM_ARCHIVE \
