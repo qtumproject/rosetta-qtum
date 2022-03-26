@@ -17,7 +17,18 @@
     "end_conditions": {
       "create_account": 10,
       "transfer": 10
-    }
+    },
+    "prefunded_accounts": [{
+      "privkey": "59656e1d7413a42bbf127be564ef1a08962ddaa7b101b271087462094cd2adef",
+      "account_identifier": {
+        "address": "tq1qxagv83u8vgg656de4aa04xvxe7jfzguwmg020n"
+      },
+      "curve_type": "secp256k1",
+      "currency":{
+        "symbol": "tQTUM",
+        "decimals": 8
+      }
+    }]
   },
   "data": {
     "initial_balance_fetch_disabled": true,
