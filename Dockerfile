@@ -49,24 +49,32 @@ RUN apt-get update && apt-get install -y curl make gcc g++
 ENV GOLANG_VERSION 1.17.5
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
 ENV GOLANG_DOWNLOAD_SHA256 bd78114b0d441b029c8fe0341f4910370925a4d270a6a590668840675b0c653e
+ENV QTUM_ROSETTA_VERSION rosetta-stable
 
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
   && tar -C /usr/local -xzf golang.tar.gz \
   && rm golang.tar.gz
 
+RUN apt-get update \
+  && apt-get install -y git make gcc \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/qtumproject/rosetta-qtum.git src \
+  && cd src \
+  && git checkout $QTUM_ROSETTA_VERSION
+
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
 # Use native remote build context to build in any directory
-COPY . src 
 RUN cd src \
   && go build \
   && cd .. \
   && mv src/rosetta-qtum /app/rosetta-qtum \
   && mv src/assets/* /app \
-  && rm -rf src 
+  && rm -rf src
 
 ## Build Final Image
 FROM ubuntu:20.04
