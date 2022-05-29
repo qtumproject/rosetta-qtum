@@ -23,19 +23,18 @@ USE AT YOUR OWN RISK! COINBASE ASSUMES NO RESPONSIBILITY NOR LIABILITY IF THERE 
 `rosetta-qtum` provides a reference implementation of the Rosetta API for
 Qtum in Golang. If you haven't heard of the Rosetta API, you can find more
 information [here](https://rosetta-api.org).
-
 ## Features
+
 * Rosetta API implementation (both Data API and Construction API)
 * UTXO cache for all accounts (accessible using the Rosetta `/account/balance` API)
 * Stateless, offline, curve-based transaction construction from any SegWit-Bech32 Address
+* Automatically prune bitcoind while indexing blocks
+* Reduce sync time with concurrent block indexing
+* Use [Zstandard compression](https://github.com/facebook/zstd) to reduce the size of data stored on disk without needing to write a manual byte-level encoding
 
+**YOU MUST [INSTALL DOCKER](https://www.docker.com/get-started) FOR THESE INSTRUCTIONS TO WORK.**
 
-## Usage
-As specified in the [Rosetta API Principles](https://www.rosetta-api.org/docs/automated_deployment.html),
-all Rosetta implementations must be deployable via Docker and support running via either an
-[`online` or `offline` mode](https://www.rosetta-api.org/docs/node_deployment.html#multiple-modes).
-
-**YOU MUST INSTALL DOCKER FOR THE FOLLOWING INSTRUCTIONS TO WORK. YOU CAN DOWNLOAD DOCKER [HERE](https://www.docker.com/get-started).**
+#### Image Installation
 
 ### Install
 Clone this repository and run the following command to create a Docker image called `rosetta-qtum:latest`.
@@ -50,29 +49,49 @@ Running the following commands will start a Docker container in
 a data directory at `<working directory>/qtum-data` and the Rosetta API accessible
 at port `8080`.
 
-#### Mainnet:Online
+Uncloned repo:
 ```text
 docker run -d --rm --ulimit "nofile=100000:100000" -v "$(pwd)/qtum-data:/data" -e "MODE=ONLINE" -e "NETWORK=MAINNET" -e "PORT=8080" -p 8080:8080 -p 8333:8333 rosetta-qtum:latest
 ```
-_If you cloned the repository, you can run `make run-mainnet-online`._
+Cloned repo:
+```text
+make run-mainnet-online
+```
 
-#### Mainnet:Offline
+###### **Mainnet:Offline**
+
+Uncloned repo:
 ```text
 docker run -d --rm -e "MODE=OFFLINE" -e "NETWORK=MAINNET" -e "PORT=8081" -p 8081:8081 rosetta-qtum:latest
 ```
-_If you cloned the repository, you can run `make run-mainnet-offline`._
+Cloned repo:
+```text
+make run-mainnet-offline
+```
 
-#### Testnet:Online
+###### **Testnet:Online**
+
+Uncloned repo:
 ```text
 docker run -d --rm --ulimit "nofile=100000:100000" -v "$(pwd)/qtum-data:/data" -e "MODE=ONLINE" -e "NETWORK=TESTNET" -e "PORT=8080" -p 8080:8080 -p 18333:18333 rosetta-qtum:latest
 ```
-_If you cloned the repository, you can run `make run-testnet-online`._
 
-#### Testnet:Offline
+Cloned repo: 
+```text
+make run-testnet-online
+```
+
+###### **Testnet:Offline**
+
+Uncloned repo:
 ```text
 docker run -d --rm -e "MODE=OFFLINE" -e "NETWORK=TESTNET" -e "PORT=8081" -p 8081:8081 rosetta-qtum:latest
 ```
-_If you cloned the repository, you can run `make run-testnet-offline`._
+
+Cloned repo: 
+```text
+make run-testnet-offline
+```
 
 ## System Requirements
 `rosetta-qtum` has been tested on an GCP `T2d-standard-16` instance.
@@ -202,19 +221,48 @@ and run one of the following commands:
 * `rosetta-cli check:construction --configuration-file rosetta-cli-conf/testnet/config.json` - This command validates the blockchain’s construction, signing, and broadcasting.
 * `rosetta-cli check:data --configuration-file rosetta-cli-conf/mainnet/config.json` - This command validates that the Data API information in the `mainnet` network is correct. It also ensures that the implementation does not miss any balance-changing operations.
 
-## Issues
-Interested in helping fix issues in this repository? You can find to-dos in the [Issues](https://github.com/coinbase/rosetta-bitcoin/issues) section with the `help wanted` tag. Be sure to reach out on our [community](https://community.rosetta-api.org) before you tackle anything on this list.
+Read the [How to Test your Rosetta Implementation](https://www.rosetta-api.org/docs/rosetta_test.html) documentation for additional details.
 
+## Contributing
 
-## Development
-* `make deps` to install dependencies
-* `make test` to run tests
-* `make lint` to lint the source code
-* `make salus` to check for security concerns
-* `make build-local` to build a Docker image from the local context
-* `make coverage-local` to generate a coverage report
+You may contribute to the `rosetta-bitcoin` project in various ways:
+
+* [Asking Questions](CONTRIBUTING.md/#asking-questions)
+* [Providing Feedback](CONTRIBUTING.md/#providing-feedback)
+* [Reporting Issues](CONTRIBUTING.md/#reporting-issues)
+
+Read our [Contributing](CONTRIBUTING.MD) documentation for more information.
+
+When you've finished an implementation for a blockchain, share your work in the [ecosystem category of the community site](https://community.rosetta-api.org/c/ecosystem). Platforms looking for implementations for certain blockchains will be monitoring this section of the website for high-quality implementations they can use for integration. Make sure that your implementation meets the [expectations](https://www.rosetta-api.org/docs/node_deployment.html) of any implementation.
+
+You can also find community implementations for a variety of blockchains in the [rosetta-ecosystem](https://github.com/coinbase/rosetta-ecosystem) repository.
+
+## Documentation
+
+You can find the Rosetta API documentation at [rosetta-api.org](https://www.rosetta-api.org/docs/welcome.html). 
+
+Check out the [Getting Started](https://www.rosetta-api.org/docs/getting_started.html) section to start diving into Rosetta. 
+
+Our documentation is divided into the following sections:
+
+* [Product Overview](https://www.rosetta-api.org/docs/welcome.html)
+* [Getting Started](https://www.rosetta-api.org/docs/getting_started.html)
+* [Rosetta API Spec](https://www.rosetta-api.org/docs/Reference.html)
+* [Testing](https://www.rosetta-api.org/docs/rosetta_cli.html)
+* [Best Practices](https://www.rosetta-api.org/docs/node_deployment.html)
+* [Repositories](https://www.rosetta-api.org/docs/rosetta_specifications.html)
+
+## Related Projects
+
+* [rosetta-sdk-go](https://github.com/coinbase/rosetta-sdk-go) — The `rosetta-sdk-go` SDK provides a collection of packages used for interaction with the Rosetta API specification. 
+* [rosetta-specifications](https://github.com/coinbase/rosetta-specifications) — Much of the SDK code is generated from this repository.
+* [rosetta-cli](https://github.com/coinbase/rosetta-ecosystem) — Use the `rosetta-cli` tool to test your Rosetta API implementation. The tool also provides the ability to look up block contents and account balances.
+
+### Sample Implementations
+
+You can find community implementations for a variety of blockchains in the [rosetta-ecosystem](https://github.com/coinbase/rosetta-ecosystem) repository, and in the [ecosystem category](https://community.rosetta-api.org/c/ecosystem) of our community site. 
 
 ## License
 This project is available open source under the terms of the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
 
-© 2021 Coinbase
+© 2022 Coinbase
