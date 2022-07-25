@@ -49,6 +49,8 @@ Running the following commands will start a Docker container in
 a data directory at `<working directory>/qtum-data` and the Rosetta API accessible
 at port `8080`.
 
+###### **Mainnet:Online**
+
 Uncloned repo:
 ```text
 docker run -d --rm --ulimit "nofile=100000:100000" -v "$(pwd)/qtum-data:/data" -e "MODE=ONLINE" -e "NETWORK=MAINNET" -e "PORT=8080" -p 8080:8080 -p 8333:8333 rosetta-qtum:latest
