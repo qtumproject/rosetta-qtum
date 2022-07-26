@@ -28,7 +28,7 @@ build:
 	docker build -t rosetta-qtum:latest https://github.com/qtumproject/rosetta-qtum.git
 
 build-local:
-	docker build -t rosetta-qtum:latest .
+	docker build -t rosetta-qtum:latest --no-cache -f Dockerfile.local .
 
 build-release:
 	# make sure to always set version with vX.X.X
