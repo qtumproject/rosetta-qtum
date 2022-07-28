@@ -12,6 +12,7 @@
   "memory_limit_disabled": false,
   "compression_disabled": true,
   "max_reorg_depth": 50,
+  "coin_supported": true,
   "construction": {
     "constructor_dsl_file": "qtum.ros",
     "end_conditions": {
