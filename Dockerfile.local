@@ -1,18 +1,3 @@
-# Copyright 2020 Coinbase, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-# Build bitcoind
 FROM ubuntu:20.04 as qtumd-builder
 
 RUN mkdir -p /app \
@@ -48,7 +33,6 @@ RUN apt-get update && apt-get install -y curl make gcc g++
 ENV GOLANG_VERSION 1.17.5
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
 ENV GOLANG_DOWNLOAD_SHA256 bd78114b0d441b029c8fe0341f4910370925a4d270a6a590668840675b0c653e
-ENV QTUM_ROSETTA_VERSION rosetta-stable
 
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
   && echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
@@ -59,9 +43,7 @@ RUN apt-get update \
   && apt-get install -y git make gcc \
   && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/qtumproject/rosetta-qtum.git src \
-  && cd src \
-  && git checkout $QTUM_ROSETTA_VERSION
+COPY . ./src/
 
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
