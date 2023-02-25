@@ -3,3 +3,5 @@ bitcoin-data
 cli-data
 qtum-data
 data
+.DS_Store
+.vscode

@@ -80,6 +80,8 @@ var MainNetParams = Params{
 	HDCoinType: 0,
 }
 
+var SimNetParams = MainNetParams
+
 // TestNet3Params defines the network parameters for the test Bitcoin network
 // (version 3).  Not to be confused with the regression test network, this
 // network is sometimes simply called "testnet".
@@ -107,6 +109,8 @@ var TestNet3Params = Params{
 	// address generation.
 	HDCoinType: 1,
 }
+
+var RegressionNetParams = TestNet3Params
 
 var (
 	// ErrDuplicateNet describes an error where the parameters for a Bitcoin
@@ -208,8 +212,9 @@ func IsBech32SegwitPrefix(prefix string) bool {
 // ErrInvalidHDKeyID error will be returned.
 //
 // Reference:
-//   SLIP-0132 : Registered HD version bytes for BIP-0032
-//   https://github.com/satoshilabs/slips/blob/master/slip-0132.md
+//
+//	SLIP-0132 : Registered HD version bytes for BIP-0032
+//	https://github.com/satoshilabs/slips/blob/master/slip-0132.md
 func RegisterHDKeyID(hdPublicKeyID []byte, hdPrivateKeyID []byte) error {
 	if len(hdPublicKeyID) != 4 || len(hdPrivateKeyID) != 4 {
 		return ErrInvalidHDKeyID
