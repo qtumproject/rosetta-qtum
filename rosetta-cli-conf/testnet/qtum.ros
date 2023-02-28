@@ -1,3 +1,30 @@
+request_funds(1){
+  find_account{
+    currency = {"symbol":"tQTUM", "decimals":8};
+    random_account = find_balance({
+      "minimum_balance":{
+        "value": "0",
+        "currency": {{currency}}
+      },
+      "create_limit":1
+    });
+  },
+
+  // Create a separate scenario to request funds so that
+  // the address we are using to request funds does not
+  // get rolled back if funds do not yet exist.
+  request{
+    loaded_account = find_balance({
+      "account_identifier": {{random_account.account_identifier}},
+      "minimum_balance":{
+        "value": "1000000",
+        "currency": {{currency}}
+      },
+      "require_coin":true
+    });
+  }
+}
+
 create_account(1){
   create{
     network = {"network":"Testnet3", "blockchain":"Qtum"};
@@ -145,7 +172,7 @@ return_funds(10){
     currency = {"symbol":"tQTUM", "decimals":8};
 
     // Recipient should be prefunded account in config file. 
-    recipient = {"address": "tq1qxagv83u8vgg656de4aa04xvxe7jfzguwmg020n"};
+    recipient = {"address": "tq1q8xxk8s9hpvtzea40mvsmqhdtjkwawt077wg6qs"};
 
     // We look for a sender that is able to pay the 
     // max_fee_amount + min_utxo size (reserved_amount is max_fee_amount + min_utxo size).
