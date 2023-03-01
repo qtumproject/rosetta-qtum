@@ -28,9 +28,9 @@ import (
 
 	bitcoinUtils "github.com/qtumproject/rosetta-qtum/utils"
 
-	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcutil"
 	"github.com/coinbase/rosetta-sdk-go/types"
 	"github.com/coinbase/rosetta-sdk-go/utils"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcutil"
 )
 
 const (
@@ -768,16 +768,15 @@ func (b *Client) parseAmount(amount float64) (uint64, error) {
 }
 
 // parseOutputAccount parses a bitcoinScriptPubKey and returns an account
-// identifier. The account identifier's address corresponds to the first
-// address encoded in the script.
+// identifier.
 func (b *Client) parseOutputAccount(
 	scriptPubKey *ScriptPubKey,
 ) *types.AccountIdentifier {
-	if len(scriptPubKey.Addresses) != 1 {
+	if scriptPubKey.Address == "" {
 		return &types.AccountIdentifier{Address: scriptPubKey.Hex}
 	}
 
-	return &types.AccountIdentifier{Address: scriptPubKey.Addresses[0]}
+	return &types.AccountIdentifier{Address: scriptPubKey.Address}
 }
 
 // coinbaseTxOperation constructs a transaction operation for the coinbase input.

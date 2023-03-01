@@ -23,7 +23,7 @@ import (
 )
 
 const (
-	// Blockchain is Bitcoin.
+	// Blockchain is Qtum.
 	Blockchain string = "Qtum"
 
 	// MainnetNetwork is the value of the network
@@ -145,11 +145,12 @@ var (
 // of a Bitcoin transaction that must be satisfied to spend
 // the output.
 type ScriptPubKey struct {
-	ASM          string   `json:"asm"`
-	Hex          string   `json:"hex"`
-	RequiredSigs int64    `json:"reqSigs,omitempty"`
-	Type         string   `json:"type"`
-	Addresses    []string `json:"addresses,omitempty"`
+	ASM          string `json:"asm"`
+	Hex          string `json:"hex"`
+	RequiredSigs int64  `json:"reqSigs,omitempty"`
+	Type         string `json:"type"`
+	// Addresses    []string `json:"addresses,omitempty"` // Deprecated in Bitcoin Core 23
+	Address string `json:"address,omitempty"`
 }
 
 // ScriptSig is a script on the input operations of a

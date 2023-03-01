@@ -33,9 +33,7 @@
               "hex": "a914228f554bbf766d6f9cc828de1126e3d35d15e5fe87",
               "reqSigs": 1,
               "type": "scripthash",
-              "addresses": [
-                "34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK"
-              ]
+              "address": "34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK"
             }
           },
           {
@@ -78,9 +76,7 @@
               "hex": "76a914c398efa9c392ba6013c5e04ee729755ef7f58b3288ac",
               "reqSigs": 1,
               "type": "pubkeyhash",
-              "addresses": [
-                "1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn"
-              ]
+              "address": "1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn"
             }
           },
           {
@@ -91,9 +87,7 @@
               "hex": "76a914948c765a6914d43f2a7ac177da2c2f6b52de3d7c88ac",
               "reqSigs": 1,
               "type": "pubkeyhash",
-              "addresses": [
-                "1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx"
-              ]
+              "address": "1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx"
             }
           }
         ],
@@ -149,10 +143,7 @@
               "hex": "76a914c398efa9c392ba6013c5e04ee729755ef7f58b3288ac",
               "reqSigs": 1,
               "type": "pubkeyhash",
-              "addresses": [
-                "1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
-                "1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx"
-              ]
+              "address": "1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn"
             }
           }
         ],
