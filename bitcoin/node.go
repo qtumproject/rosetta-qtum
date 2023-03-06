@@ -29,8 +29,8 @@ import (
 )
 
 const (
-	bitcoindLogger       = "bitcoind"
-	bitcoindStdErrLogger = "bitcoind stderr"
+	bitcoindLogger       = "qtumd"
+	bitcoindStdErrLogger = "qtumd stderr"
 )
 
 func logPipe(ctx context.Context, pipe io.ReadCloser, identifier string) error {

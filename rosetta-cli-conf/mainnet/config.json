@@ -9,7 +9,6 @@
   "max_online_connections": 1000,
   "tip_delay": 1800,
   "compression_disabled": true,
-  "memory_limit_disabled": true,
   "data": {
     "initial_balance_fetch_disabled": true,
     "end_conditions": {

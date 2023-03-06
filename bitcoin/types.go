@@ -18,12 +18,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg"
 	"github.com/coinbase/rosetta-sdk-go/types"
+	"github.com/qtumproject/rosetta-qtum/qtumsuite/btcd/chaincfg"
 )
 
 const (
-	// Blockchain is Bitcoin.
+	// Blockchain is Qtum.
 	Blockchain string = "Qtum"
 
 	// MainnetNetwork is the value of the network
@@ -33,6 +33,10 @@ const (
 	// TestnetNetwork is the value of the network
 	// in TestnetNetworkIdentifier.
 	TestnetNetwork string = "Testnet3"
+
+	// RegtestNetwork is the value of the network
+	// in RegtestNetworkIdentifier.
+	RegtestNetwork string = "Regtest"
 
 	// Decimals is the decimals value
 	// used in Currency.
@@ -108,6 +112,9 @@ var (
 	// TestnetParams are the params for testnet.
 	TestnetParams = &chaincfg.TestNet3Params
 
+	// RegtestParams are the params for regtest.
+	RegtestParams = &chaincfg.RegressionNetParams
+
 	// TestnetCurrency is the *types.Currency for testnet.
 	TestnetCurrency = &types.Currency{
 		Symbol:   "tQTUM",
@@ -138,11 +145,12 @@ var (
 // of a Bitcoin transaction that must be satisfied to spend
 // the output.
 type ScriptPubKey struct {
-	ASM          string   `json:"asm"`
-	Hex          string   `json:"hex"`
-	RequiredSigs int64    `json:"reqSigs,omitempty"`
-	Type         string   `json:"type"`
-	Addresses    []string `json:"addresses,omitempty"`
+	ASM          string `json:"asm"`
+	Hex          string `json:"hex"`
+	RequiredSigs int64  `json:"reqSigs,omitempty"`
+	Type         string `json:"type"`
+	// Addresses    []string `json:"addresses,omitempty"` // Deprecated in Bitcoin Core 23
+	Address string `json:"address,omitempty"`
 }
 
 // ScriptSig is a script on the input operations of a

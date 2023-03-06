@@ -105,9 +105,7 @@ var (
 							Hex:          "76a91445db0b779c0b9fa207f12a8218c94fc77aff504588ac",
 							RequiredSigs: 1,
 							Type:         "pubkeyhash",
-							Addresses: []string{
-								"mmtKKnjqTPdkBnBMbNt5Yu2SCwpMaEshEL",
-							},
+							Address:      "mmtKKnjqTPdkBnBMbNt5Yu2SCwpMaEshEL",
 						},
 					},
 					{
@@ -166,9 +164,7 @@ var (
 							Hex:          "a914228f554bbf766d6f9cc828de1126e3d35d15e5fe87",
 							RequiredSigs: 1,
 							Type:         "scripthash",
-							Addresses: []string{
-								"34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK",
-							},
+							Address:      "34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK",
 						},
 					},
 					{
@@ -210,9 +206,7 @@ var (
 							Hex:          "76a914c398efa9c392ba6013c5e04ee729755ef7f58b3288ac",
 							RequiredSigs: 1,
 							Type:         "pubkeyhash",
-							Addresses: []string{
-								"1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
-							},
+							Address:      "1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
 						},
 					},
 					{
@@ -223,9 +217,7 @@ var (
 							Hex:          "76a914948c765a6914d43f2a7ac177da2c2f6b52de3d7c88ac",
 							RequiredSigs: 1,
 							Type:         "pubkeyhash",
-							Addresses: []string{
-								"1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx",
-							},
+							Address:      "1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx",
 						},
 					},
 				},
@@ -280,10 +272,11 @@ var (
 							Hex:          "76a914c398efa9c392ba6013c5e04ee729755ef7f58b3288ac",
 							RequiredSigs: 1,
 							Type:         "pubkeyhash",
-							Addresses: []string{
-								"1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
-								"1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx",
-							},
+							Address:      "1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
+							// Addresses: []string{
+							// 	"1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
+							// 	"1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx",
+							// },
 						},
 					},
 				},
@@ -807,9 +800,7 @@ func TestParseBlock(t *testing.T) {
 										Hex:          "76a91445db0b779c0b9fa207f12a8218c94fc77aff504588ac",                                    // nolint
 										Type:         "pubkeyhash",
 										RequiredSigs: 1,
-										Addresses: []string{
-											"mmtKKnjqTPdkBnBMbNt5Yu2SCwpMaEshEL",
-										},
+										Address:      "mmtKKnjqTPdkBnBMbNt5Yu2SCwpMaEshEL",
 									},
 								}),
 							},
@@ -959,9 +950,7 @@ func TestParseBlock(t *testing.T) {
 										Hex:          "a914228f554bbf766d6f9cc828de1126e3d35d15e5fe87",
 										RequiredSigs: 1,
 										Type:         "scripthash",
-										Addresses: []string{
-											"34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK",
-										},
+										Address:      "34qkc2iac6RsyxZVfyE2S5U5WcRsbg2dpK",
 									},
 								}),
 							},
@@ -1054,9 +1043,7 @@ func TestParseBlock(t *testing.T) {
 										Hex:          "76a914c398efa9c392ba6013c5e04ee729755ef7f58b3288ac",
 										RequiredSigs: 1,
 										Type:         "pubkeyhash",
-										Addresses: []string{
-											"1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
-										},
+										Address:      "1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
 									},
 								}),
 							},
@@ -1086,9 +1073,7 @@ func TestParseBlock(t *testing.T) {
 										Hex:          "76a914948c765a6914d43f2a7ac177da2c2f6b52de3d7c88ac",
 										RequiredSigs: 1,
 										Type:         "pubkeyhash",
-										Addresses: []string{
-											"1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx",
-										},
+										Address:      "1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx",
 									},
 								}),
 							},
@@ -1201,7 +1186,8 @@ func TestParseBlock(t *testing.T) {
 								Type:   OutputOpType,
 								Status: types.String(SuccessStatus),
 								Account: &types.AccountIdentifier{
-									Address: "76a914c398efa9c392ba6013c5e04ee729755ef7f58b3288ac",
+									// Address: "76a914c398efa9c392ba6013c5e04ee729755ef7f58b3288ac",
+									Address: "1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
 								},
 								Amount: &types.Amount{
 									Value:    "20056000000",
@@ -1219,10 +1205,11 @@ func TestParseBlock(t *testing.T) {
 										Hex:          "76a914c398efa9c392ba6013c5e04ee729755ef7f58b3288ac",
 										RequiredSigs: 1,
 										Type:         "pubkeyhash",
-										Addresses: []string{
-											"1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
-											"1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx",
-										},
+										Address:      "1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
+										// Addresses: []string{
+										// 	"1JqDybm2nWTENrHvMyafbSXXtTk5Uv5QAn",
+										// 	"1EYTGtG4LnFfiMvjJdsU7GMGCQvsRSjYhx",
+										// },
 									},
 								}),
 							},

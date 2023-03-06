@@ -55,9 +55,7 @@
               "hex": "76a91445db0b779c0b9fa207f12a8218c94fc77aff504588ac",
               "reqSigs": 1,
               "type": "pubkeyhash",
-              "addresses": [
-                "mmtKKnjqTPdkBnBMbNt5Yu2SCwpMaEshEL"
-              ]
+              "address" : "mmtKKnjqTPdkBnBMbNt5Yu2SCwpMaEshEL"
             }
           },
           {
