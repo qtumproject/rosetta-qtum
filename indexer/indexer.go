@@ -153,7 +153,7 @@ func defaultBadgerOptions(
 	// Load tables into standard I/O value logs.
 	opts.TableLoadingMode = options.FileIO
 	opts.ValueLogLoadingMode = options.FileIO
-	
+
 	// Use an extended table size for larger commits.
 	opts.MaxTableSize = database.DefaultMaxTableSize
 
@@ -270,7 +270,7 @@ func (i *Indexer) waitForNode(ctx context.Context) error {
 			return nil
 		}
 
-		logger.Infow("waiting for bitcoind...")
+		logger.Infow("waiting for qtumd...")
 		if err := sdkUtils.ContextSleep(ctx, nodeWaitSleep); err != nil {
 			return err
 		}
