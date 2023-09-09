@@ -1,8 +1,8 @@
 FROM ubuntu:22.04 as qtumd-builder
 
-RUN mkdir -p /qtum \
-  && chown -R nobody:nogroup /qtum
-WORKDIR /qtum
+# RUN mkdir -p /qtum \
+#   && chown -R nobody:nogroup /qtum
+# WORKDIR /qtum
 
 ENV DEBIAN_FRONTEND=non-interactive
 
