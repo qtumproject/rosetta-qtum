@@ -13,11 +13,10 @@ ARG BRANCH_NAME=master
 RUN apt-get update && \
     apt-get install -y software-properties-common \
     autoconf automake autotools-dev \
-    binutils bison bsdmainutils  build-essential \
-    ca-certificates cmake curl faketime g++-9 gcc-9 git \
+    bsdmainutils  build-essential \
+    ca-certificates cmake curl  g++-9 gcc-9 git \
     libcurl4-openssl-dev libevent-dev libtool libtool-bin libgmp-dev libgmp3-dev \
-    libmicrohttpd-dev libminiupnpc-dev libboost-all-dev libssl-dev \
-    patch pkg-config python3 python3-pip
+    libboost-all-dev libssl-dev pkg-config binutils bison  libminiupnpc-dev
 
 # Install dependencies for qtum gui
 
