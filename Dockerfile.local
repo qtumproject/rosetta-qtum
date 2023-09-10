@@ -1,9 +1,5 @@
 FROM ubuntu:22.04 as qtumd-builder
 
-# RUN mkdir -p /qtum \
-#   && chown -R nobody:nogroup /qtum
-# WORKDIR /qtum
-
 ENV DEBIAN_FRONTEND=non-interactive
 
 # Set the branch name to build
@@ -18,8 +14,7 @@ RUN apt-get update && \
     libcurl4-openssl-dev libevent-dev libtool libtool-bin libgmp-dev libgmp3-dev \
     libboost-all-dev libssl-dev pkg-config binutils bison  libminiupnpc-dev
 
-# Install dependencies for qtum gui
-
+# Set gcc-9 as default compiler
 RUN update-alternatives \
 --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 \
 --slave /usr/bin/g++ g++ /usr/bin/g++-9 \
