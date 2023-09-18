@@ -25,9 +25,9 @@ WORKDIR /app
 
 
 #ADD http://198.211.122.66/qtumd /app/qtumd
-ENV QTUM_RELEASE_URL https://github.com/qtumproject/qtum/releases/download/v23.0
-ENV QTUM_ARCHIVE qtum-23.0-x86_64-linux-gnu.tar.gz
-ENV QTUM_FOLDER qtum-23.0
+ENV QTUM_RELEASE_URL https://github.com/qtumproject/qtum/releases/download/v24.1
+ENV QTUM_ARCHIVE qtum-24.1-x86_64-linux-gnu.tar.gz
+ENV QTUM_FOLDER qtum-24.1
 
 ADD $QTUM_RELEASE_URL/$QTUM_ARCHIVE ./
 RUN tar -xzf $QTUM_ARCHIVE \
